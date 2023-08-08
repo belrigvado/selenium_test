@@ -72,8 +72,8 @@ public class TkaniTestCase {
 
     @Before
     public void init() {
-        // инициализируем веб-драйвер
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        // инициализируем веб-драйвер для работы
+        System.setProperty("webdriver.chrome.driver", "/home/alisa/IdeaProjects/selenium_test/chromedriver_linux64/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -89,6 +89,28 @@ public class TkaniTestCase {
         Assert.assertFalse(searchResults.isEmpty());
         Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
     }
+
+    @Test
+    public void positiveTest1() {
+        // делаем запрос со словом "мохер". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "замша"
+        String request = "мохер";
+        makeSearch(request);
+        List<String> searchResults = getSearchResults();
+        Assert.assertFalse(searchResults.isEmpty());
+        Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
+    }
+
+    @Test
+    public void positiveTest2() {
+        // делаем запрос со словом "шелк атласный". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "замша"
+        String request = "шелк атласный";
+        makeSearch(request);
+        List<String> searchResults = getSearchResults();
+        Assert.assertFalse(searchResults.isEmpty());
+        Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
+    }
+
+
 
     @Test
     public void negativeTest() {
