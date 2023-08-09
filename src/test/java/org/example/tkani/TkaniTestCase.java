@@ -119,6 +119,18 @@ public class TkaniTestCase {
         Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
 
     }
+
+
+    @Test
+    public void positiveTest4() {
+        // делаем запрос со словом "ситец". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "ситец"
+        String request = "ситец";
+        makeSearch(request);
+        List<String> searchResults = getSearchResults();
+        Assert.assertFalse(searchResults.isEmpty());
+        Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
+
+    }
         @Test
         public void negativeTest () {
             // делаем запрос с пробелом. Ожидаем получить "заглушку" - пустую выдачу
