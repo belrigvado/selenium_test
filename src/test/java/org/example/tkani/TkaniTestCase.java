@@ -101,6 +101,16 @@ public class TkaniTestCase {
 
     @Test
     public void positiveTest2() {
+        // делаем запрос со словом "тюль". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "тюль"
+        String request = "тюль";
+        makeSearch(request);
+        List<String> searchResults = getSearchResults();
+        Assert.assertFalse(searchResults.isEmpty());
+        Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
+    }
+
+    @Test
+    public void positiveTest3() {
         // делаем запрос со словом "шелк атласный". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "шелк атласный"
         String request = "шелк атласный";
         makeSearch(request);
@@ -110,9 +120,21 @@ public class TkaniTestCase {
     }
 
     @Test
-    public void positiveTest3() {
+    public void positiveTest4() {
         // делаем запрос со словом "шелк". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "шелк"
         String request = "шелк атласный";
+        makeSearch(request);
+        List<String> searchResults = getSearchResults();
+        Assert.assertFalse(searchResults.isEmpty());
+        Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
+
+    }
+
+
+    @Test
+    public void positiveTest5() {
+        // делаем запрос со словом "ситец". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "ситец"
+        String request = "ситец";
         makeSearch(request);
         List<String> searchResults = getSearchResults();
         Assert.assertFalse(searchResults.isEmpty());
