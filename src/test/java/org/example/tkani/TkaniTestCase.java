@@ -91,8 +91,8 @@ public class TkaniTestCase {
 
     @Test
     public void positiveTest1() {
-        // делаем запрос со словом "мохер". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "мохер"
-        String request = "мохер";
+        // делаем запрос со словом "мохер ". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "мохер"
+        String request = "мохер ";
         makeSearch(request);
         List<String> searchResults = getSearchResults();
         Assert.assertFalse(searchResults.isEmpty());
@@ -101,8 +101,8 @@ public class TkaniTestCase {
 
     @Test
     public void positiveTest2() {
-        // делаем запрос со словом "тюль". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "тюль"
-        String request = "тюль";
+        // делаем запрос со словом "тюль.". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "тюль"
+        String request = "тюль.";
         makeSearch(request);
         List<String> searchResults = getSearchResults();
         Assert.assertFalse(searchResults.isEmpty());
@@ -121,8 +121,8 @@ public class TkaniTestCase {
 
     @Test
     public void positiveTest4() {
-        // делаем запрос со словом "шелк". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "шелк"
-        String request = "шелк атласный";
+        // делаем запрос со словом "шелк атласный ". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "шелк"
+        String request = "шелк атласный ";
         makeSearch(request);
         List<String> searchResults = getSearchResults();
         Assert.assertFalse(searchResults.isEmpty());
@@ -133,13 +133,24 @@ public class TkaniTestCase {
 
     @Test
     public void positiveTest5() {
-        // делаем запрос со словом "ситец". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "ситец"
-        String request = "ситец";
+        // делаем запрос со словом "ситец,". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "ситец"
+        String request = "ситец,";
         makeSearch(request);
         List<String> searchResults = getSearchResults();
         Assert.assertFalse(searchResults.isEmpty());
         Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
 
+    }
+
+
+    @Test
+    public void positiveTest6() {
+        // делаем запрос со словом "тюль№". Ожидаем получить непустой результат, в каждом из результатов должно быть слово "тюль"
+        String request = "тюль№";
+        makeSearch(request);
+        List<String> searchResults = getSearchResults();
+        Assert.assertFalse(searchResults.isEmpty());
+        Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
     }
         @Test
         public void negativeTest () {
