@@ -46,8 +46,7 @@ public class TkaniTestCase {
         throw new IllegalStateException();
     }
 
-    private List<String> getSearchResults()
-    {
+    private List<String> getSearchResults() {
         if (!(new TkaniSearchResultPageLoader(driver).loadPage())) {
             throw new IllegalStateException();
         }
@@ -119,18 +118,19 @@ public class TkaniTestCase {
         Assert.assertFalse(searchResults.isEmpty());
         Assert.assertTrue(searchResults.stream().allMatch(s -> s.toLowerCase().contains(request.toLowerCase())));
 
+    }
+        @Test
+        public void negativeTest () {
+            // делаем запрос с пробелом. Ожидаем получить "заглушку" - пустую выдачу
+            String request = " ";
+            makeSearch(request);
+            List<String> searchResults = getSearchResults();
+            Assert.assertTrue(searchResults.isEmpty());
+        }
 
-    @Test
-    public void negativeTest() {
-        // делаем запрос с пробелом. Ожидаем получить "заглушку" - пустую выдачу
-        String request = " ";
-        makeSearch(request);
-        List<String> searchResults = getSearchResults();
-        Assert.assertTrue(searchResults.isEmpty());
+        @After
+        public void destroy () {
+            driver.close();
+        }
     }
 
-    @After
-    public void destroy() {
-        driver.close();
-    }
-}
